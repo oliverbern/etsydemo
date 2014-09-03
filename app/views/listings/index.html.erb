@@ -2,19 +2,22 @@
   <% @listings.each do |listing| %>
     <div class="col-md-3">
         <div class="thumbnail">
-          <%= image_tag listing.image.url %>
+          <%= link_to image_tag(listing.image.url), listing %>      
             <div class="caption">
               <%= listing.name %>
               <%= number_to_currency(listing.price) %><br>
               <%= "Sold by #{listing.user.name}" %><br>
               <%= link_to 'Show', listing, class: "btn btn-link" %>
+              <% if current_user == listing.user %>
               <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %>
               <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %>
+              <% end %>
           </div>
         </div>     
     </div>
   <% end %>
 </div>
 
-
+<% if user_signed_in? %>
 <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
+<% end %>

@@ -1,23 +1,37 @@
-<div class="row">
-  <% @listings.each do |listing| %>
-    <div class="col-md-3">
-        <div class="thumbnail">
-          <%= link_to image_tag(listing.image.url), listing %>      
-            <div class="caption">
-              <%= listing.name %>
-              <%= number_to_currency(listing.price) %><br>
-              <%= "Sold by #{listing.user.name}" %><br>
-              <%= link_to 'Show', listing, class: "btn btn-link" %>
-              <% if current_user == listing.user %>
-              <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %>
-              <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %>
-              <% end %>
-          </div>
-        </div>     
-    </div>
-  <% end %>
+<table class="table table-striped table-bordered">
+<tr>
+  <th class="center">Image</th>
+  <th class="center">Name</th>
+  <th class="center">Description</th>
+  <th class="center">Price</th>
+  <th class="center">Action</th>
+</tr>
+<% @listings.each do |listing| %>
+  <tr>
+<td class="center"><%= image_tag listing.image.url(:thumb) %></td>
+<td class="center"><%= listing.name %></td>
+<td class="center"><%= listing.description %></td>
+<td class="center"><%= number_to_currency(listing.price) %></td>
+<td>
+  <div class="btn-group">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Actions
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><%= link_to "View", listing, class: "btn btn-link" %></li>
+    <li role="presentation"><%= link_to "Edit", edit_listing_path(listing), class: "btn btn-link" %></li>
+    <li role="presentation"><%= link_to "Destroy", listing, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %></li>
+  </ul>
 </div>
-
+  
+  
+  
+</td>
+  </tr> 
+<% end %>
+</table>
+<br>
 <% if user_signed_in? %>
 <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
 <% end %>

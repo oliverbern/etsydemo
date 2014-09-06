@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     @orders = Order.all.where(buyer: current_user).order("created_at DESC")
   end
     
-  end
+  
 
 
   # GET /orders/new
@@ -45,9 +45,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
- 
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -59,4 +56,6 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:address, :city, :state)
     end
+end
+
 

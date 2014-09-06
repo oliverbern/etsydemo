@@ -14,6 +14,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'paperclip-dropbox', '>= 1.1.7'
 gem "figaro"
 gem 'devise'
+gem 'stripe'
 
 group :production do
   gem 'pg'
